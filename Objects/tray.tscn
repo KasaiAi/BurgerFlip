@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0hno8okb0khy"]
+
+[ext_resource type="PackedScene" uid="uid://bbmeul8fxku8s" path="res://Assets/tray.glb" id="1_xge2b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_15q7t"]
+size = Vector3(2.51083, 0.174816, 2.52506)
+
+[node name="Tray" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+
+[node name="Cube" parent="RigidBody3D" instance=ExtResource("1_xge2b")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+
+[node name="TrayCollider" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_15q7t")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk3d42akk4eh1"]
+
+[ext_resource type="Script" path="res://Scripts/backyard.gd" id="1_n1hiy"]
+[ext_resource type="PackedScene" uid="uid://fsqoo6fm3bng" path="res://Objects/grill.tscn" id="1_qa00n"]
+[ext_resource type="PackedScene" uid="uid://b0hno8okb0khy" path="res://Objects/tray.tscn" id="2_yoftt"]
+[ext_resource type="Script" path="res://Scripts/tray.gd" id="3_2qvv4"]
+[ext_resource type="PackedScene" uid="uid://devmxfw605vh2" path="res://Objects/borgar.tscn" id="4_b1er7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_72ucq"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_p4lo4"]
+size = Vector3(1.244, 0.98, 0.988)
+
+[node name="Backyard" type="Node3D"]
+script = ExtResource("1_n1hiy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 2.83501, 1.61219)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.629125, 0.62437, -0.462995, -0.723504, -0.252622, 0.642437, 0.284156, 0.739151, 0.610665, 4.30839, 6.39905, 1.33118)
+
+[node name="Grill" parent="." instance=ExtResource("1_qa00n")]
+
+[node name="Tray" parent="." instance=ExtResource("2_yoftt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 2.5)
+script = ExtResource("3_2qvv4")
+
+[node name="Borgar" parent="Tray" instance=ExtResource("4_b1er7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.03, -0.782781)
+
+[node name="Borgar2" parent="Tray" instance=ExtResource("4_b1er7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, -0.782781)
+
+[node name="Borgar3" parent="Tray" instance=ExtResource("4_b1er7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.03, -0.782781)
+
+[node name="target" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.07, 0, 0, 0, 0.1, 0, 0, 0, 0.07, 0, -0.0269533, 0)
+mesh = SubResource("CylinderMesh_72ucq")
+
+[node name="cone" type="MeshInstance3D" parent="target"]
+transform = Transform3D(-1.72857, 2.61007e-07, 0, -1.82705e-07, -1.21, 0, 0, 0, 1.72857, 0, -1.96135, 0)
+mesh = SubResource("PrismMesh_p4lo4")
