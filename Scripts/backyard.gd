@@ -1,28 +1,28 @@
 extends Node3D
 
-var is_dragging = false
-var mouse_pos = Vector2()
+var mouse_pos
+var location
 
-func _input(event):
-	if event.is_action_pressed("click"):
-		print("click")
-		var collision = get_world_3d().get_direct_space_state().intersect_ray(PhysicsRayQueryParameters3D.create(transform.origin, Vector3(0, 0, -20)))
-		
-		if collision:
-			print(collision.position)
-			if collision.collider == "Borgar2":
-				is_dragging = true
-	
-	if event.is_action_released("click"):
-		is_dragging = false
+signal raycast_pos
 
-func _process(delta):
-	if is_dragging:
-		var new_pos = get_viewport().get_mouse_position() - mouse_pos
-		set_position(new_pos)
+func _ready():
+	pass
 
-func raycast_object():
-	var spaceState = get_world_3d().get_direct_space_state()
+func _process(_delta):
+	if raycast().has("position"):
+		location = raycast().position
+		emit_signal("raycast_pos", location)
+
+func _input(_event):
+	if Input.is_action_just_pressed("click"):
+		if raycast().has("collider"):
+			var collider = raycast().collider
+			if collider.is_in_group("burger"):
+				collider.is_dragging = true
+
+# Raycaster
+func raycast():
+	var spaceState = get_world_3d().direct_space_state
 	var mousePos = get_viewport().get_mouse_position()
 	var camera = $Camera3D
 	
@@ -30,7 +30,9 @@ func raycast_object():
 	var rayEnd = rayOrigin + camera.project_ray_normal(mousePos) * 200
 	
 	var intersect = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
+	intersect.collide_with_areas = true
 	var ray = spaceState.intersect_ray(intersect)
 	
-	if ray:
-		return ray.collider.getparent()
+#	var test = get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(camera.project_ray_origin(mousePos), camera.project_ray_origin(mousePos) + camera.project_ray_normal(mousePos) * 200))
+	
+	return ray

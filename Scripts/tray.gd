@@ -1,23 +1,19 @@
 extends Node3D
 
 var motion = Vector3()
-var spawnPatty = Timer.new()
 var show_pos = 2
 var hide_pos = 2.4
+var patties = 3
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+#	spawn initial patties
+	pass
 
-func _physics_process(_delta):
+func _input(_event):
 	if Input.is_action_pressed("ui_accept"):
 		position.z = show_pos
-		
-	else:
+	elif Input.is_action_just_released("ui_accept"):
 		position.z = hide_pos
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
-
+func _on_spawn_patty_timeout():
+	patties += 1

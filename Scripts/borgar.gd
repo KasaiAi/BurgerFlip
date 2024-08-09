@@ -1,11 +1,20 @@
 extends Node3D
 
+var mouse_pos: Vector2
+var is_dragging = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	get_parent().get_parent().connect("raycast_pos", _on_raycast_pos)
 
+func _on_raycast_pos(location):
+	if is_dragging:
+		$Collider.disabled = true
+		global_position = location
+		global_position.y += .2
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _input(_event):
+	if is_dragging and Input.is_action_just_released("click"):
+		global_position.y -= .2
+		is_dragging = false
+		$Collider.disabled = false
+		print("Saiu")

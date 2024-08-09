@@ -10,18 +10,19 @@ size = Vector3(1.29446, 0.0500808, 0.548719)
 
 [node name="Grill" type="Node3D"]
 
-[node name="Grill" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.03, 0, 0, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0, 0, 0)
 mesh = ExtResource("1_38cot")
+skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="GrillArea" type="Area3D" parent="StaticBody3D"]
+[node name="GrillArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60496, -0.405447)
 
-[node name="GrillCollider" type="CollisionShape3D" parent="StaticBody3D/GrillArea"]
+[node name="GrillCollider" type="CollisionShape3D" parent="GrillArea"]
 shape = SubResource("BoxShape3D_4a0jb")
 
-[node name="ShelfCollider" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="Shelf" type="Area3D" parent="."]
+
+[node name="ShelfCollider" type="CollisionShape3D" parent="Shelf"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13785, -0.8884)
 shape = SubResource("BoxShape3D_avsg8")
