@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://xulrn4losn3"]
+
+[resource]
+resource_name = "CookedMeat"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.41, 0.1763, 0.098400004, 1)
+metallic_specular = 0.0
+roughness = 0.4

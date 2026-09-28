@@ -1,12 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://dk3d42akk4eh1"]
 
-[ext_resource type="Script" path="res://Scripts/backyard.gd" id="1_n1hiy"]
+[ext_resource type="Script" uid="uid://c74vifl0ukhob" path="res://Scripts/backyard.gd" id="1_n1hiy"]
 [ext_resource type="PackedScene" uid="uid://fsqoo6fm3bng" path="res://Objects/grill.tscn" id="1_qa00n"]
 [ext_resource type="PackedScene" uid="uid://b0hno8okb0khy" path="res://Objects/tray.tscn" id="2_yoftt"]
 [ext_resource type="PackedScene" uid="uid://devmxfw605vh2" path="res://Objects/borgar.tscn" id="4_b1er7"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bsd4a"]
-size = Vector3(23.8575, 0.0249249, 23.9826)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_yrm41"]
 
 [node name="Backyard" type="Node3D"]
 script = ExtResource("1_n1hiy")
@@ -34,5 +33,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.03, -0.782781)
 [node name="DragZone" type="Area3D" parent="."]
 
 [node name="Collider" type="CollisionShape3D" parent="DragZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61527, -9.56655)
-shape = SubResource("BoxShape3D_bsd4a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.615, 0)
+shape = SubResource("WorldBoundaryShape3D_yrm41")

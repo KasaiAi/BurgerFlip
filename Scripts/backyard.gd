@@ -6,19 +6,20 @@ var location
 signal raycast_pos
 
 func _ready():
-	pass
+	Global.world = self
 
 func _process(_delta):
 	if raycast().has("position"):
 		location = raycast().position
 		emit_signal("raycast_pos", location)
 
-func _input(_event):
-	if Input.is_action_just_pressed("click"):
+func _input(event):
+	if Input.is_action_just_pressed("click") and event is InputEventMouseButton:
 		if raycast().has("collider"):
 			var collider = raycast().collider
 			if collider.is_in_group("burger"):
 				collider.is_dragging = true
+				collider.reparent(self)
 
 # Raycaster
 func raycast():
